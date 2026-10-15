@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CBT TKA Matematika SMA - SMA IT Al Ishlah Gorontalo</title>
+
+  <!-- MathJax Configuration untuk Render Rumus Matematika -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 2px solid #e2e8f0;
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .header-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .school-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .school-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .school-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #064e3b;
+      letter-spacing: -0.01em;
+    }
+
+    .school-sub {
+      font-size: 11px;
+      font-weight: 700;
+      color: #059669;
+      margin-top: 1px;
+    }
+
+    .header-status-box {
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-viol {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      color: #be123c;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .badge-timer {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      padding: 4px 14px;
+      border-radius: 8px;
+      text-align: right;
+    }
+
+    .timer-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .timer-val {
+      font-size: 17px;
+      font-weight: 900;
+      font-family: monospace;
+      color: #064e3b;
+    }
+
+    .main-container {
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 16px;
+      flex-grow: 1;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px -2px rgba(0,0,0,0.04);
+      padding: 24px;
+    }
+
+    .login-box {
+      max-width: 540px;
+      margin: 20px auto;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-icon {
+      width: 60px;
+      height: 60px;
+      background: #d1fae5;
+      color: #059669;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 10px auto;
+    }
+
+    .exam-info-card {
+      background: linear-gradient(135deg, #059669, #047857);
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .exam-info-card span {
+      display: block;
+      color: #a7f3d0;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .warning-card {
+      background: #fefce8;
+      border-left: 4px solid #eab308;
+      padding: 12px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #713f12;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14px;
+      background: #f8fafc;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      background: #ffffff;
+      border-color: #059669;
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #059669;
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25);
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover {
+      background: #047857;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.99);
+    }
+
+    .exam-layout {
+      display: none;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 900px) {
+      .exam-layout {
+        grid-template-columns: 8.5fr 3.5fr;
+      }
+    }
+
+    .soal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .soal-no-badge {
+      background: #059669;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 5px 14px;
+      border-radius: 6px;
+    }
+
+    .diagram-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;
+    }
+
+    .question-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.15s;
+    }
+
+    .option-item:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .option-item.selected {
+      background: #ecfdf5;
+      border-color: #059669;
+      box-shadow: 0 0 0 1px #059669;
+    }
+
+    .option-radio-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #cbd5e1;
+      margin-right: 12px;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #ffffff;
+    }
+
+    .option-item.selected .option-radio-circle {
+      border-color: #059669;
+    }
+
+    .option-item.selected .option-radio-circle::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #059669;
+      border-radius: 50%;
+    }
+
+    .option-checkbox-square {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #cbd5e1;
+      margin-right: 12px;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #ffffff;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .option-item.selected .option-checkbox-square {
+      border-color: #059669;
+      background: #059669;
+    }
+
+    .option-item.selected .option-checkbox-square::after {
+      content: "✓";
+    }
+
+    .option-text {
+      font-size: 14px;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: 13.5px;
+    }
+
+    .matrix-table th {
+      background: #059669;
+      color: #ffffff;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .matrix-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .matrix-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .matrix-cell-opt {
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .matrix-radio-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1.5px solid #cbd5e1;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .matrix-radio-pill.active {
+      background: #ecfdf5;
+      border-color: #059669;
+      color: #065f46;
+      font-weight: 800;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .btn-nav {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-prev {
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .btn-next {
+      background: #059669;
+      color: #ffffff;
+    }
+
+    .btn-finish {
+      background: #047857;
+      color: #ffffff;
+      display: none;
+    }
+
+    .btn-ragu {
+      background: #fef9c3;
+      border: 1px solid #facc15;
+      color: #854d0e;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-ragu.active {
+      background: #eab308;
+      color: #ffffff;
+      border-color: #ca8a04;
+    }
+
+    .num-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .num-btn {
+      height: 38px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1.5px solid #cbd5e1;
+      background: #ffffff;
+      color: #475569;
+      transition: all 0.15s;
+    }
+
+    .num-btn.terjawab {
+      background: #059669;
+      color: #ffffff;
+      border-color: #047857;
+    }
+
+    .num-btn.ragu {
+      background: #eab308;
+      color: #ffffff;
+      border-color: #ca8a04;
+    }
+
+    .num-btn.active {
+      box-shadow: 0 0 0 3px #0f172a;
+      transform: scale(1.05);
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      max-width: 460px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    footer {
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      padding: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="school-info">
+        <img src="https://iili.io/CSRcfLB.png" alt="Logo SMAIT Al Ishlah" class="school-logo" onerror="this.style.display='none'">
+        <div>
+          <div class="school-title">SMA IT AL ISHLAH GORONTALO</div>
+          <div class="school-sub">CBT TKA MATEMATIKA SMA &bull; PAKET B &bull; TP 2026/2027</div>
+        </div>
+      </div>
+
+      <div id="header-status" class="header-status-box">
+        <div class="badge-viol">Violations: <b id="header-violation-count">0</b>/5</div>
+        <div class="badge-timer">
+          <div class="timer-label">Time Remaining</div>
+          <div id="header-timer" class="timer-val">80:00</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <section id="view-login" class="card login-box">
+      <div class="login-header">
+        <div class="login-icon">&#x1F4D0;</div>
+        <h2 style="font-size: 20px; font-weight: 800; color: #064e3b;">Tes Kemampuan Akademik (TKA)</h2>
+        <p style="font-size: 13px; color: #64748b; margin-top: 4px;">Matematika SMA &bull; Guru: Rahmat Djafar, S.Pd., Gr</p>
+      </div>
+
+      <div class="exam-info-card">
+        <div><span>Mata Pelajaran:</span><b>Matematika SMA (Paket B)</b></div>
+        <div><span>Jumlah Soal:</span><b>20 Butir Soal Terintegrasi</b></div>
+        <div><span>Alokasi Waktu:</span><b>80 Menit</b></div>
+        <div><span>Skala Penilaian:</span><b>0 - 100</b></div>
+      </div>
+
+      <div class="warning-card">
+        <b>&#x26A0; Peringatan Keamanan Aktif:</b><br>
+        Dilarang beralih tab, meminimalkan jendela, atau membuka aplikasi lain. Setiap pelanggaran memicu penguncian layar <b>3 menit (kelipatan)</b> dan <b>diskualifikasi otomatis pada pelanggaran ke-5</b>.
+      </div>
+
+      <div id="login-error" style="display: none; background: #fff1f2; color: #be123c; padding: 10px; border-radius: 8px; font-size: 12px; margin-bottom: 14px; font-weight: 700;">
+        Harap isi Nama Lengkap dan pilih Kelas Anda!
+      </div>
+
+      <div class="form-group">
+        <label>Nama Lengkap Siswa</label>
+        <input type="text" id="input-nama" class="form-input" placeholder="Masukkan nama lengkap siswa...">
+      </div>
+
+      <div class="form-group">
+        <label>Kelas</label>
+        <select id="input-kelas" class="form-input" style="cursor: pointer;">
+          <option value="">-- Pilih Kelas --</option>
+          <option value="Kelas X">Kelas X</option>
+          <option value="Kelas XI">Kelas XI</option>
+          <option value="Kelas XII">Kelas XII</option>
+        </select>
+      </div>
+
+      <button type="button" id="btn-start-exam" onclick="handleStart()" class="btn-submit">&#x25B6; Mulai Mengerjakan Ujian</button>
+    </section>
+
+    <section id="view-exam" class="exam-layout">
+      <div>
+        <div class="card">
+          <div class="soal-header">
+            <div>
+              <span id="label-soal-no" class="soal-no-badge">Soal 1 dari 20</span>
+            </div>
+            <div>
+              <button type="button" id="btn-ragu" onclick="toggleRagu()" class="btn-ragu">&#x2691; Ragu-ragu</button>
+            </div>
+          </div>
+
+          <div id="box-diagram-soal" class="diagram-box" style="display: none;"></div>
+
+          <div id="text-pertanyaan" class="question-title"></div>
+          <div id="box-opsi-jawaban"></div>
+        </div>
+
+        <div class="nav-bar">
+          <button type="button" id="btn-prev" onclick="handleNavPrev()" class="btn-nav btn-prev">&larr; Sebelumnya</button>
+          <button type="button" id="btn-next" onclick="handleNavNext()" class="btn-nav btn-next">Berikutnya &rarr;</button>
+          <button type="button" id="btn-finish" onclick="bukaModalKonfirmasi()" class="btn-nav btn-finish">&#x2714; Selesai & Kirim</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div style="font-weight: 800; font-size: 14px; margin-bottom: 8px; display: flex; justify-content: space-between;">
+            <span>Navigasi Soal</span>
+            <span id="stat-terjawab" style="color: #059669; font-size: 12px;">0/20 Terjawab</span>
+          </div>
+
+          <div class="num-grid" id="grid-nomor"></div>
+
+          <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid #e2e8f0; font-size: 12px;">
+            <div><span style="color: #64748b;">Peserta:</span> <b id="display-nama">-</b></div>
+            <div><span style="color: #64748b;">Kelas:</span> <b id="display-kelas">-</b></div>
+            <div><span style="color: #64748b;">Mapel:</span> <b>Matematika SMA (Paket B)</b></div>
+            <div><span style="color: #64748b;">Pengajar:</span> <b>Rahmat Djafar, S.Pd., Gr</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-dq" class="card login-box" style="display: none; border-color: #f43f5e; text-align: center;">
+      <div style="font-size: 40px; color: #e11d48; margin-bottom: 10px;">&#x26D4;</div>
+      <h2 style="font-size: 20px; font-weight: 900; color: #be123c;">SISWA DIDISKUALIFIKASI!</h2>
+      <p style="font-size: 13px; color: #475569; margin: 8px 0 16px 0;">Terdeteksi melakukan pelanggaran integritas sebanyak <b>5 kali</b>. Ujian Anda telah dibatalkan secara otomatis.</p>
+      <div style="background: #fff1f2; padding: 12px; border-radius: 10px; font-size: 13px; text-align: left; margin-bottom: 16px;">
+        <div>Nama: <b id="dq-nama">-</b></div>
+        <div>Kelas: <b id="dq-kelas">-</b></div>
+        <div>Status: <b style="color: #be123c;">DISKUALIFIKASI (SKOR: 0)</b></div>
+      </div>
+    </section>
+
+    <section id="view-result" class="card login-box" style="display: none; text-align: center;">
+      <div style="font-size: 40px; color: #059669; margin-bottom: 10px;">&#x1F3C6;</div>
+      <h2 style="font-size: 20px; font-weight: 900; color: #0f172a;">Ujian Selesai!</h2>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Hasil evaluasi TKA Matematika Anda telah berhasil dikirim ke database Google Spreadsheet.</p>
+      
+      <div style="background: #059669; color: #ffffff; padding: 20px; border-radius: 14px; margin-bottom: 16px;">
+        <div style="font-size: 12px; text-transform: uppercase; color: #a7f3d0; font-weight: 700;">Nilai Akhir (Skala 0 - 100)</div>
+        <div id="res-score" style="font-size: 48px; font-weight: 900;">0</div>
+        <div style="font-size: 12px; margin-top: 8px; color: #ecfdf5;" id="res-detail">20 Soal Diselesaikan</div>
+      </div>
+
+      <div style="background: #f8fafc; padding: 14px; border-radius: 10px; font-size: 13px; text-align: left; margin-bottom: 16px;">
+        <div>Nama: <b id="res-nama">-</b></div>
+        <div>Kelas: <b id="res-kelas">-</b></div>
+        <div>Mata Pelajaran: <b>Matematika SMA (Paket B)</b></div>
+        <div>Guru Pengajar: <b>Rahmat Djafar, S.Pd., Gr</b></div>
+        <div>Total Pelanggaran: <b id="res-viol">0 kali</b></div>
+      </div>
+
+      <div style="background: #ffffff; border: 1.5px solid #e2e8f0; padding: 14px; border-radius: 12px; text-align: left; margin-bottom: 16px;">
+        <div style="font-size: 13px; font-weight: 800; color: #0f172a; margin-bottom: 10px; display: flex; justify-content: space-between;">
+          <span>Analisis Butir Jawaban:</span>
+          <span id="res-stat-badge" style="font-size: 12px; color: #059669; font-weight: bold;">-</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; font-size: 12px; text-align: center;">
+          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; padding: 8px; border-radius: 8px;">
+            Jawaban Benar: <b id="res-total-benar" style="font-size: 16px;">0</b>
+          </div>
+          <div style="background: #fff1f2; border: 1px solid #fecdd3; color: #be123c; padding: 8px; border-radius: 8px;">
+            Jawaban Salah: <b id="res-total-salah" style="font-size: 16px;">0</b>
+          </div>
+        </div>
+        <div style="font-size: 12px; color: #475569;">
+          <div>Nomor Soal yang Salah: <span id="res-list-salah" style="color: #be123c; font-weight: 700;">-</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="modal-banned" class="modal-overlay">
+    <div class="modal-content" style="background: #0f172a; color: #ffffff; border: 2px solid #ef4444;">
+      <div style="font-size: 36px; color: #f87171; margin-bottom: 8px;">&#x1F512;</div>
+      <h3 style="font-size: 18px; font-weight: 800; color: #f87171; text-transform: uppercase;">LAYAR TERKUNCI SEMENTARA!</h3>
+      <p style="font-size: 13px; color: #cbd5e1; margin: 8px 0;">Pelanggaran <b id="banned-count" style="color: #f87171;">1</b> dari 5: Meninggalkan layar ujian.</p>
+      <div style="background: #1e293b; padding: 12px; border-radius: 10px; margin: 14px 0;">
+        <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">WAKTU HUKUMAN TERSISA:</div>
+        <div id="banned-timer" style="font-size: 32px; font-weight: 900; color: #facc15; font-family: monospace;">03:00</div>
+      </div>
+      <p style="font-size: 11px; color: #fda4af;">*Peringatan: Pada pelanggaran ke-5, Anda akan otomatis DIDISKUALIFIKASI.</p>
+    </div>
+  </div>
+
+  <div id="modal-confirm" class="modal-overlay">
+    <div class="modal-content">
+      <h3 style="font-size: 17px; font-weight: 800; color: #0f172a; margin-bottom: 8px;">Kumpulkan Jawaban Ujian?</h3>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 14px;">Pastikan Anda telah memeriksa kembali seluruh jawaban sebelum mengirim.</p>
+      <div style="background: #f8fafc; padding: 12px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; text-align: left;">
+        <div>Terjawab: <b id="conf-ans" style="color: #059669;">0</b> / 20 Soal</div>
+        <div>Ragu-ragu: <b id="conf-doubt" style="color: #ca8a04;">0</b> Soal</div>
+        <div>Belum Dijawab: <b id="conf-empty" style="color: #be123c;">0</b> Soal</div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button type="button" onclick="tutupModalKonfirmasi()" style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; font-weight: 700; cursor: pointer;">Periksa Lagi</button>
+        <button type="button" onclick="submitUjian(false)" style="flex: 1; padding: 10px; border: none; background: #059669; color: #ffffff; border-radius: 8px; font-weight: 700; cursor: pointer;">Ya, Kumpulkan</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; SMA Islam Terpadu Al Ishlah Gorontalo &bull; TKA Matematika SMA (Paket B)
+  </footer>
+
+  <script>
+    // GANTI URL DI BAWAH DENGAN WEB APP URL DARI GOOGLE APPS SCRIPT SETELAH DI-DEPLOY
+    const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbyexample-replace-this-with-your-gas-exec-url/exec";
+
+    const DIAGRAMS = {
+      d2: `
+        <svg viewBox="0 0 460 260" width="100%" max-width="440" height="230" style="background:#ffffff; border-radius:8px;">
+          <line x1="60" y1="210" x2="420" y2="210" stroke="#0f172a" stroke-width="2" marker-end="url(#arrowX)"/>
+          <line x1="80" y1="240" x2="80" y2="20" stroke="#0f172a" stroke-width="2" marker-end="url(#arrowY)"/>
+          <defs>
+            <marker id="arrowX" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#0f172a" />
+            </marker>
+            <marker id="arrowY" viewBox="0 0 10 10" refX="5" refY="6" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 1 10 L 5 0 L 9 10 z" fill="#0f172a" />
+            </marker>
+          </defs>
+          <text x="425" y="215" font-size="13" font-weight="bold">X</text>
+          <text x="75" y="15" font-size="13" font-weight="bold">Y</text>
+          <text x="68" y="226" font-size="12">0</text>
+          <text x="70" y="80" font-size="12" font-weight="bold">6</text>
+          <text x="70" y="145" font-size="12" font-weight="bold">3</text>
+          <text x="240" y="228" font-size="12" font-weight="bold">6</text>
+          <text x="350" y="228" font-size="12" font-weight="bold">9</text>
+          <line x1="50" y1="55" x2="280" y2="235" stroke="#2563eb" stroke-width="2.2"/>
+          <text x="260" y="180" font-size="11" fill="#2563eb" font-weight="bold">x + y = 6</text>
+          <line x1="50" y1="138" x2="390" y2="218" stroke="#dc2626" stroke-width="2.2"/>
+          <text x="340" y="195" font-size="11" fill="#dc2626" font-weight="bold">x + 3y = 9</text>
+          <polygon points="80,145 190,170 80,80" fill="#a7f3d0" opacity="0.65"/>
+          <text x="130" y="195" font-size="13" font-weight="bold" fill="#0f172a">I</text>
+          <text x="110" y="140" font-size="13" font-weight="bold" fill="#065f46">II</text>
+          <text x="220" y="150" font-size="13" font-weight="bold" fill="#0f172a">III</text>
+          <text x="235" y="200" font-size="13" font-weight="bold" fill="#0f172a">IV</text>
+          <text x="50" y="100" font-size="13" font-weight="bold" fill="#0f172a">V</text>
+        </svg>
+      `,
+      d6: `
+        <svg viewBox="0 0 340 240" width="100%" max-width="320" height="210" style="background:#ffffff; border-radius:8px;">
+          <rect x="50" y="25" width="180" height="180" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+          <rect x="50" y="25" width="40" height="40" fill="#94a3b8" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <rect x="190" y="25" width="40" height="40" fill="#94a3b8" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <rect x="50" y="165" width="40" height="40" fill="#94a3b8" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <rect x="190" y="165" width="40" height="40" fill="#94a3b8" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <text x="65" y="48" font-size="12" font-style="italic">x</text>
+          <text x="205" y="48" font-size="12" font-style="italic">x</text>
+          <text x="65" y="188" font-size="12" font-style="italic">x</text>
+          <text x="205" y="188" font-size="12" font-style="italic">x</text>
+          <line x1="35" y1="25" x2="35" y2="205" stroke="#0f172a" stroke-width="1.5"/>
+          <line x1="30" y1="25" x2="40" y2="25" stroke="#0f172a" stroke-width="1.5"/>
+          <line x1="30" y1="205" x2="40" y2="205" stroke="#0f172a" stroke-width="1.5"/>
+          <text x="5" y="120" font-size="12" font-weight="bold">24 cm</text>
+        </svg>
+      `,
+      d8: `
+        <svg viewBox="0 0 520 250" width="100%" max-width="500" height="230" style="background:#ffffff; border-radius:8px;">
+          <line x1="50" y1="200" x2="490" y2="200" stroke="#0f172a" stroke-width="1.5"/>
+          <line x1="50" y1="160" x2="490" y2="160" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="50" y1="120" x2="490" y2="120" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="50" y1="80" x2="490" y2="80" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="50" y1="40" x2="490" y2="40" stroke="#e2e8f0" stroke-width="1"/>
+          <text x="20" y="205" font-size="11">0</text>
+          <text x="15" y="165" font-size="11">50</text>
+          <text x="10" y="125" font-size="11">100</text>
+          <text x="10" y="85" font-size="11">150</text>
+          <text x="10" y="45" font-size="11">200</text>
+          <rect x="75" y="104" width="35" height="96" fill="#059669"/>
+          <text x="82" y="98" font-size="11" font-weight="bold">120</text>
+          <text x="80" y="218" font-size="11">Jan</text>
+          <rect x="145" y="88" width="35" height="112" fill="#059669"/>
+          <text x="152" y="82" font-size="11" font-weight="bold">140</text>
+          <text x="150" y="218" font-size="11">Feb</text>
+          <rect x="215" y="112" width="35" height="88" fill="#059669"/>
+          <text x="222" y="106" font-size="11" font-weight="bold">110</text>
+          <text x="220" y="218" font-size="11">Mar</text>
+          <rect x="285" y="56" width="35" height="144" fill="#047857"/>
+          <text x="292" y="50" font-size="11" font-weight="bold">180</text>
+          <text x="290" y="218" font-size="11">Apr</text>
+          <rect x="355" y="168" width="35" height="32" fill="#dc2626"/>
+          <text x="365" y="162" font-size="11" font-weight="bold">40</text>
+          <text x="360" y="218" font-size="11">Mei</text>
+          <rect x="425" y="96" width="35" height="104" fill="#059669"/>
+          <text x="432" y="90" font-size="11" font-weight="bold">130</text>
+          <text x="430" y="218" font-size="11">Jun</text>
+        </svg>
+      `,
+      d9: `
+        <table style="border-collapse:collapse; width:260px; font-size:13px; text-align:center; background:#ffffff; box-shadow:0 1px 3px rgba(0,0,0,0.1); border-radius:6px; overflow:hidden;">
+          <thead>
+            <tr style="background:#059669; color:#ffffff;">
+              <th style="padding:8px; border:1px solid #cbd5e1;">Nilai Ujian</th>
+              <th style="padding:8px; border:1px solid #cbd5e1;">Frekuensi ($f$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:6px; border:1px solid #cbd5e1;">$51 - 55$</td><td style="padding:6px; border:1px solid #cbd5e1;">3</td></tr>
+            <tr style="background:#f8fafc;"><td style="padding:6px; border:1px solid #cbd5e1;">$56 - 60$</td><td style="padding:6px; border:1px solid #cbd5e1;">5</td></tr>
+            <tr><td style="padding:6px; border:1px solid #cbd5e1;">$61 - 65$</td><td style="padding:6px; border:1px solid #cbd5e1;">10</td></tr>
+            <tr style="background:#ecfdf5; font-weight:bold;"><td style="padding:6px; border:1px solid #cbd5e1;">$66 - 70$</td><td style="padding:6px; border:1px solid #cbd5e1; color:#059669;">16</td></tr>
+            <tr><td style="padding:6px; border:1px solid #cbd5e1;">$71 - 75$</td><td style="padding:6px; border:1px solid #cbd5e1;">8</td></tr>
+            <tr style="background:#f8fafc;"><td style="padding:6px; border:1px solid #cbd5e1;">$76 - 80$</td><td style="padding:6px; border:1px solid #cbd5e1;">4</td></tr>
+          </tbody>
+        </table>
+      `,
+      d13: `
+        <svg viewBox="0 0 380 200" width="100%" max-width="360" height="190" style="background:#ffffff; border-radius:8px;">
+          <polygon points="100,50 260,50 320,160 40,160" fill="#ecfdf5" stroke="#059669" stroke-width="2.5"/>
+          <line x1="40" y1="160" x2="260" y2="50" stroke="#0284c7" stroke-width="2" stroke-dasharray="4,3"/>
+          <text x="30" y="180" font-size="13" font-weight="bold">A</text>
+          <text x="325" y="180" font-size="13" font-weight="bold">B</text>
+          <text x="265" y="45" font-size="13" font-weight="bold">C</text>
+          <text x="90" y="45" font-size="13" font-weight="bold">D</text>
+          <text x="175" y="45" font-size="11" fill="#047857">&gt;</text>
+          <text x="175" y="175" font-size="11" fill="#047857">&gt;</text>
+          <line x1="65" y1="100" x2="75" y2="105" stroke="#059669" stroke-width="2"/>
+          <line x1="285" y1="100" x2="295" y2="105" stroke="#059669" stroke-width="2"/>
+          <text x="55" y="150" font-size="11" font-weight="bold">65°</text>
+          <text x="270" y="150" font-size="11" font-weight="bold">25°</text>
+        </svg>
+      `,
+      d14: `
+        <svg viewBox="0 0 360 160" width="100%" max-width="340" height="150" style="background:#ffffff; border-radius:8px;">
+          <polygon points="60,40 180,40 300,120 60,120" fill="#f8fafc" stroke="#334155" stroke-width="2.2"/>
+          <rect x="60" y="40" width="14" height="14" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+          <rect x="60" y="106" width="14" height="14" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="45" y="42" font-size="13" font-weight="bold">A</text>
+          <text x="180" y="32" font-size="13" font-weight="bold">D</text>
+          <text x="310" y="125" font-size="13" font-weight="bold">C</text>
+          <text x="45" y="125" font-size="13" font-weight="bold">B</text>
+          <text x="25" y="85" font-size="12" font-weight="bold" fill="#059669">AB = 4</text>
+        </svg>
+      `,
+      d15: `
+        <svg viewBox="0 0 340 220" width="100%" max-width="320" height="200" style="background:#ffffff; border-radius:8px;">
+          <line x1="60" y1="20" x2="60" y2="180" stroke="#334155" stroke-width="4"/>
+          <line x1="40" y1="180" x2="300" y2="180" stroke="#64748b" stroke-width="3"/>
+          <rect x="60" y="164" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+          <line x1="60" y1="40" x2="220" y2="180" stroke="#b45309" stroke-width="5" stroke-linecap="round"/>
+          <text x="145" y="100" font-size="12" font-weight="bold" fill="#b45309">Panjang = 8 m</text>
+          <path d="M 190,180 A 30,30 0 0,0 180,145" fill="none" stroke="#059669" stroke-width="2"/>
+          <text x="155" y="172" font-size="12" font-weight="bold" fill="#059669">60°</text>
+          <text x="15" y="110" font-size="12" font-weight="bold" fill="#0f172a">Tinggi = ?</text>
+        </svg>
+      `,
+      d18: `
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; justify-content:center;">
+          <div style="background:#ffffff; border:2px solid #cbd5e1; border-radius:12px; padding:12px; width:150px; text-align:center;">
+            <div style="font-size:11px; font-weight:bold; color:#64748b;">METERAN LISTRIK</div>
+            <div style="background:#0f172a; color:#22c55e; font-family:monospace; font-size:18px; padding:6px; border-radius:6px; margin:8px 0; font-weight:bold;">0 1 8 0</div>
+            <div style="font-size:10px; color:#475569;">kWh Meter Pasca Bayar</div>
+          </div>
+          <div style="background:#ffffff; border:2px dashed #f59e0b; border-radius:12px; padding:12px 16px; width:210px; font-size:12px;">
+            <div style="font-weight:bold; color:#b45309; border-bottom:1px solid #fde68a; padding-bottom:4px; margin-bottom:6px;">TAGIHAN LISTRIK BULANAN</div>
+            <div>Bulan : Maret 2026</div>
+            <div>Tarif : $f(x) = 1.400x + 30.000$</div>
+            <div style="margin-top:6px; font-weight:bold; color:#064e3b; background:#ecfdf5; padding:4px 6px; border-radius:6px;">Total Bayar: Rp198.000,00</div>
+          </div>
+        </div>
+      `,
+      d19: `
+        <div style="background:#ffffff; border:1.5px solid #cbd5e1; border-radius:12px; padding:14px; text-align:center; max-width:400px; width:100%;">
+          <div style="font-weight:bold; font-size:12px; color:#064e3b; margin-bottom:8px;">SKEMA PROYEKSI KE LAYAR HORIZONTAL</div>
+          <div style="display:flex; justify-content:space-around; align-items:center; font-size:11px;">
+            <div style="border:1.5px solid #059669; padding:8px; border-radius:8px; background:#ecfdf5;">
+              <b>Ukuran Gambar Asli</b><br>50 cm &times; 50 cm
+            </div>
+            <div style="font-size:16px; color:#64748b;">&rarr;</div>
+            <div style="border:1.5px solid #2563eb; padding:8px; border-radius:8px; background:#eff6ff;">
+              <b>Ukuran Layar Rapat</b><br>3,0 m &times; 2,0 m
+            </div>
+          </div>
+          <div style="margin-top:8px; font-size:11.5px; color:#475569;">
+            Jarak proyektor ke layar = <b>4 meter</b><br>
+            Rumus Skala Pembesaran: <b>$0,8 \times \text{jarak (m)}$</b>
+          </div>
+        </div>
+      `,
+      d20: `
+        <div style="background:#ffffff; border:2px solid #059669; border-radius:10px; padding:16px 24px; text-align:center; display:inline-block;">
+          <div style="font-size:11px; font-weight:bold; color:#64748b; margin-bottom:6px;">FORMAT KODE KUPON BAZAR</div>
+          <div style="font-size:24px; font-weight:900; letter-spacing:6px; color:#064e3b; font-family:monospace; background:#ecfdf5; padding:8px 16px; border-radius:8px;">
+            P1Q2R
+          </div>
+          <div style="font-size:11px; color:#475569; margin-top:6px;">P, Q, R = Huruf (A–Z) &bull; 1, 2 = Angka (0–9)</div>
+        </div>
+      `
+    };
+
+    const SOAL_DB = [
+      {
+        id: 1,
+        type: "single",
+        question: "Harga 4 buah buku dan 3 buah penggaris adalah Rp25.000,00. Jika harga sebuah buku Rp1.500,00 lebih mahal dari sebuah penggaris, maka harga 2 buah buku dan 4 buah penggaris adalah ....",
+        options: [
+          { key: "A", text: "Rp18.000,00" },
+          { key: "B", text: "Rp20.000,00" },
+          { key: "C", text: "Rp21.000,00" },
+          { key: "D", text: "Rp23.000,00" },
+          { key: "E", text: "Rp24.500,00" }
+        ],
+        key: "C"
+      },
+      {
+        id: 2,
+        type: "single",
+        diagramKey: "d2",
+        question: "Perhatikan gambar bidang koordinat di atas. Daerah yang memenuhi sistem pertidaksamaan linear $x + y \\le 6; \\, x + 3y \\ge 9; \\, x \\ge 0; \\, y \\ge 0$ adalah daerah nomor ....",
+        options: [
+          { key: "A", text: "I" },
+          { key: "B", text: "II" },
+          { key: "C", text: "III" },
+          { key: "D", text: "IV" },
+          { key: "E", text: "V" }
+        ],
+        key: "B"
+      },
+      {
+        id: 3,
+        type: "single",
+        question: "Diketahui fungsi $f(x) = \\sqrt{3x + 4}$, dengan $x \\ge -\\frac{4}{3}$. Jika $f^{-1}(x)$ adalah invers dari fungsi $f(x)$, maka nilai dari $f^{-1}(5)$ adalah ....",
+        options: [
+          { key: "A", text: "7" },
+          { key: "B", text: "5" },
+          { key: "C", text: "$\\frac{7}{3}$" },
+          { key: "D", text: "$-\\frac{1}{3}$" },
+          { key: "E", text: "-2" }
+        ],
+        key: "A"
+      },
+      {
+        id: 4,
+        type: "single",
+        question: "Fungsi $f: \\mathbb{R} \\to \\mathbb{R}$ dan $g: \\mathbb{R} \\to \\mathbb{R}$. Jika $g(x) = x - 2$ dan $(f \\circ g)(x) = x^3 - 6x$, maka nilai dari $f(1)$ adalah ....",
+        options: [
+          { key: "A", text: "6" },
+          { key: "B", text: "8" },
+          { key: "C", text: "8" },
+          { key: "D", text: "9" },
+          { key: "E", text: "15" }
+        ],
+        key: "D"
+      },
+      {
+        id: 5,
+        type: "single",
+        question: "Seorang peneliti melakukan pengamatan terhadap koloni bakteri. Setiap $\\frac{1}{2}$ hari bakteri membelah diri menjadi dua. Pada awal pengamatan terdapat 3 bakteri. Jika setiap 2 hari $\\frac{1}{4}$ dari jumlah bakteri mati, maka banyaknya bakteri yang masih hidup setelah 3 hari adalah ....",
+        options: [
+          { key: "A", text: "72 bakteri" },
+          { key: "B", text: "96 bakteri" },
+          { key: "C", text: "144 bakteri" },
+          { key: "D", text: "192 bakteri" },
+          { key: "E", text: "288 bakteri" }
+        ],
+        key: "C"
+      },
+      {
+        id: 6,
+        type: "single",
+        diagramKey: "d6",
+        question: "Dari selembar karton berbentuk persegi yang berukuran sisi $24\\text{ cm}$ akan dibuat kotak tanpa tutup dengan cara menggunting empat persegi berukuran $x \\times x$ di setiap pojok karton. Volume kotak terbesar yang dapat dibuat adalah ....",
+        options: [
+          { key: "A", text: "$1.024\\text{ cm}^3$" },
+          { key: "B", text: "$1.280\\text{ cm}^3$" },
+          { key: "C", text: "$1.536\\text{ cm}^3$" },
+          { key: "D", text: "$1.728\\text{ cm}^3$" },
+          { key: "E", text: "$2.048\\text{ cm}^3$" }
+        ],
+        key: "A"
+      },
+      {
+        id: 7,
+        type: "single",
+        question: "Diketahui $\\sin A = \\frac{2}{k}$ dengan $k > 2$, di mana $A$ adalah sudut tumpul. Nilai dari $\\cos A$ adalah ....",
+        options: [
+          { key: "A", text: "$\\frac{k}{\\sqrt{k^2 - 4}}$" },
+          { key: "B", text: "$\\frac{\\sqrt{k^2 - 4}}{k}$" },
+          { key: "C", text: "$\\frac{2}{\\sqrt{k^2 + 4}}$" },
+          { key: "D", text: "$-\\frac{\\sqrt{k^2 - 4}}{k}$" },
+          { key: "E", text: "$-\\frac{\\sqrt{k^2 + 4}}{k}$" }
+        ],
+        key: "D"
+      },
+      {
+        id: 8,
+        type: "single",
+        diagramKey: "d8",
+        question: "Diagram batang di atas menunjukkan produksi pakaian busana muslim yang dikelola Bu Rahmi selama semester pertama tahun 2026. Peningkatan tertinggi (lonjakan terbesar) jumlah produksi pakaian terjadi pada bulan ....",
+        options: [
+          { key: "A", text: "Februari" },
+          { key: "B", text: "April" },
+          { key: "C", text: "Mei" },
+          { key: "D", text: "Juni" },
+          { key: "E", text: "Maret" }
+        ],
+        key: "B"
+      },
+      {
+        id: 9,
+        type: "single",
+        diagramKey: "d9",
+        question: "Perhatikan data pada tabel nilai hasil ulangan harian matematika di atas. Modus dari data berkelompok tersebut adalah ....",
+        options: [
+          { key: "A", text: "66,5" },
+          { key: "B", text: "67,0" },
+          { key: "C", text: "67,6" },
+          { key: "D", text: "68,2" },
+          { key: "E", text: "68,5" }
+        ],
+        key: "C"
+      },
+      {
+        id: 10,
+        type: "single",
+        question: "Sekolah IT Al Ishlah akan mengirim 2 perwakilan grup nasyid untuk Festival Seni Pelajar. Sekolah tersebut memiliki 5 grup nasyid putra dan 3 grup nasyid putri. Penentuan perwakilan dilakukan dengan cara mengambil secara acak satu per satu tanpa pengembalian. Peluang terambilnya grup nasyid putra pada pengambilan pertama dan grup nasyid putri pada pengambilan kedua adalah ....",
+        options: [
+          { key: "A", text: "$\\frac{15}{64}$" },
+          { key: "B", text: "$\\frac{5}{14}$" },
+          { key: "C", text: "$\\frac{15}{56}$" },
+          { key: "D", text: "$\\frac{3}{8}$" },
+          { key: "E", text: "$\\frac{5}{8}$" }
+        ],
+        key: "C"
+      },
+      {
+        id: 11,
+        type: "single",
+        question: "Nilai dari hasil operasi pecahan $\\frac{1}{3} + \\frac{5}{3} \\times \\frac{9}{20}$ adalah ....",
+        options: [
+          { key: "A", text: "$\\frac{3}{4}$" },
+          { key: "B", text: "$\\frac{13}{12}$" },
+          { key: "C", text: "$\\frac{9}{10}$" },
+          { key: "D", text: "$1\\frac{1}{4}$" },
+          { key: "E", text: "$\\frac{7}{5}$" }
+        ],
+        key: "B"
+      },
+      {
+        id: 12,
+        type: "matrix",
+        question: "Mirna memproduksi dua jenis kue khas Gorontalo dengan modal Rp9.000.000,00. Biaya produksi kue jenis I sebesar Rp15.000,00 per kotak dengan laba 40%. Biaya produksi kue jenis II sebesar Rp20.000,00 per kotak dengan laba 35%. Setiap hari Mirna hanya mampu memproduksi paling banyak 550 kotak kue. Tentukan Benar atau Salah untuk setiap pernyataan berikut terkait keuntungan maksimum Mirna!",
+        columns: ["Benar", "Salah"],
+        rows: [
+          { id: "A", text: "Mirna memperoleh keuntungan maksimum jika memproduksi 400 kotak kue jenis I." },
+          { id: "B", text: "Untuk mencapai keuntungan maksimum, Mirna harus memproduksi kue jenis II lebih banyak daripada kue jenis I." },
+          { id: "C", text: "Keuntungan maksimum yang dapat diperoleh Mirna adalah Rp3.450.000,00." }
+        ],
+        key: {
+          A: "Benar",
+          B: "Salah",
+          C: "Benar"
+        }
+      },
+      {
+        id: 13,
+        type: "matrix",
+        diagramKey: "d13",
+        question: "Pada trapesium sama kaki $ABCD$ di atas, $AD = BC$, ruas $\\overline{AB}$ sejajar $\\overline{DC}$, dengan $AB > DC$. Diketahui $\\angle BAD = 65^\\circ$ dan $\\angle ABD = 25^\\circ$. Tentukan Benar atau Salah untuk setiap pernyataan berikut!",
+        columns: ["Benar", "Salah"],
+        rows: [
+          { id: "A", text: "Besar sudut $\\angle BCD = 115^\\circ$." },
+          { id: "B", text: "Besar sudut $\\angle CBD = 50^\\circ$." },
+          { id: "C", text: "Besar sudut $\\angle BDC = 25^\\circ$." }
+        ],
+        key: {
+          A: "Benar",
+          B: "Salah",
+          C: "Benar"
+        }
+      },
+      {
+        id: 14,
+        type: "single",
+        diagramKey: "d14",
+        question: "Pada trapesium siku-siku $ABCD$ di atas, diketahui panjang $AB = 4$ dan $AD \\le BC$. Apakah keliling trapesium tersebut lebih dari $30$?<br>Putuskan apakah dengan informasi tambahan berikut cukup untuk menjawab pertanyaan:<br>(1) Luas trapesium $ABCD = 36$.<br>(2) $BC = 12$ dan $CD = 5$.",
+        options: [
+          { key: "A", text: "Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (2) SAJA tidak cukup." },
+          { key: "B", text: "Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (1) SAJA tidak cukup." },
+          { key: "C", text: "DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup." },
+          { key: "D", text: "Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan Pernyataan (2) SAJA cukup." },
+          { key: "E", text: "Pernyataan (1) dan Pernyataan (2) tidak cukup untuk menjawab pertanyaan." }
+        ],
+        key: "C"
+      },
+      {
+        id: 15,
+        type: "single",
+        diagramKey: "d15",
+        question: "Suatu tangga dengan panjang 8 meter disandarkan pada dinding vertikal. Sudut yang dibentuk oleh tangga dengan lantai horizontal adalah $60^\\circ$. Tinggi dinding yang disentuh oleh ujung atas tangga tersebut adalah ....",
+        options: [
+          { key: "A", text: "4 meter" },
+          { key: "B", text: "$4\\sqrt{3}$ meter" },
+          { key: "C", text: "$4\\sqrt{2}$ meter" },
+          { key: "D", text: "$6\\sqrt{3}$ meter" },
+          { key: "E", text: "8 meter" }
+        ],
+        key: "B"
+      },
+      {
+        id: 16,
+        type: "multiselect",
+        question: "Rata-rata nilai ulangan 18 murid dari skala 100 adalah 84. Ada 2 murid yang mengikuti ujian susulan sehingga rata-rata nilai kelas dari 20 murid menjadi 83. Tentukan semua pernyataan berikut yang benar terkait nilai kedua murid susulan tersebut! <i>(Jawaban benar lebih dari satu)</i>",
+        options: [
+          { key: "A", text: "Jumlah nilai kedua murid yang mengikuti ujian susulan adalah 148." },
+          { key: "B", text: "Rata-rata nilai kedua murid yang mengikuti ujian susulan adalah 74." },
+          { key: "C", text: "Salah satu murid susulan dapat memperoleh nilai 100 asalkan murid yang lain memperoleh nilai 52." },
+          { key: "D", text: "Nilai terendah yang mungkin diperoleh salah satu murid susulan adalah 48 (jika nilai tertinggi 100)." },
+          { key: "E", text: "Jangkauan nilai kedua murid susulan tersebut tidak mungkin lebih dari 40." }
+        ],
+        key: ["A", "B", "D"]
+      },
+      {
+        id: 17,
+        type: "matrix",
+        question: "Fungsi kuadrat didefinisikan oleh $f(x) = 3(x^2 - 6x + 8)$. Tentukan Benar atau Salah pada setiap pernyataan berikut yang terkait dengan grafik fungsi $f$!",
+        columns: ["Benar", "Salah"],
+        rows: [
+          { id: "A", text: "Grafik fungsi $f$ terbuka ke atas." },
+          { id: "B", text: "Grafik fungsi $f$ memotong garis horizontal $y = -5$ di dua titik berlainan." },
+          { id: "C", text: "Grafik fungsi $f$ tidak melalui kuadran tiga (III)." }
+        ],
+        key: {
+          A: "Benar",
+          B: "Benar",
+          C: "Benar"
+        }
+      },
+      {
+        id: 18,
+        type: "multiselect",
+        diagramKey: "d18",
+        question: "Biaya tagihan listrik bulanan di sebuah apartemen dihitung dengan fungsi tarif $f(x) = 1.400x + 30.000$, di mana $x$ adalah pemakaian energi listrik (dalam kWh). Penghuni apartemen menerima tagihan sebesar Rp198.000,00. Penghuni menyadari pemakaian bulan ini lebih boros dari bulan-bulan biasanya. Berdasarkan informasi tersebut, berapa saja besaran penggunaan listrik yang biasanya digunakan di apartemen tersebut? <i>(Pilih semua jawaban yang benar, jawaban benar lebih dari satu!)</i>",
+        options: [
+          { key: "A", text: "95 kWh" },
+          { key: "B", text: "105 kWh" },
+          { key: "C", text: "115 kWh" },
+          { key: "D", text: "125 kWh" },
+          { key: "E", text: "135 kWh" }
+        ],
+        key: ["A", "B", "C"]
+      },
+      {
+        id: 19,
+        type: "matrix",
+        diagramKey: "d19",
+        question: "Pak Andi mempresentasikan desain gedung berukuran $50\\text{ cm} \\times 50\\text{ cm}$ menggunakan proyektor ke layar rapat berukuran $3,0\\text{ m} \\times 2,0\\text{ m}$. Jarak proyektor ke layar adalah 4 meter dengan skala pembesaran $0,8 \\times \\text{jarak (m)}$. Tentukan Benar atau Salah pada setiap pernyataan berikut!",
+        columns: ["Benar", "Salah"],
+        rows: [
+          { id: "A", text: "Perbandingan ukuran panjang dan lebar tampilan desain gedung di layar tetap 1 : 1." },
+          { id: "B", text: "Ukuran sisi tampilan desain gedung pada layar adalah 1,6 meter." },
+          { id: "C", text: "Terdapat bagian gambar desain asli yang terpotong karena melebihi tinggi layar proyektor." }
+        ],
+        key: {
+          A: "Benar",
+          B: "Benar",
+          C: "Salah"
+        }
+      },
+      {
+        id: 20,
+        type: "single",
+        diagramKey: "d20",
+        question: "Panitia bazar sekolah akan membuat kupon undian dengan kode akses unik 5 karakter berformat `P1Q2R`, di mana $P, Q, R$ menyatakan huruf alfabet kapital dan $1, 2$ menyatakan angka. Jika tidak boleh ada angka maupun huruf yang berulang dalam satu kupon, berapakah banyak kode akses unik yang dapat dibuat?",
+        options: [
+          { key: "A", text: "1.404.000" },
+          { key: "B", text: "1.263.600" },
+          { key: "C", text: "1.352.000" },
+          { key: "D", text: "1.560.000" },
+          { key: "E", text: "1.757.600" }
+        ],
+        key: "A"
+      }
+    ];
+
+    let currentIndex = 0;
+    let siswa = { nama: '', kelas: '' };
+    let userAnswers = {};
+    let userDoubts = {};
+    let timerInterval = null;
+    let sisaDetik = 80 * 60; // 80 Menit = 4800 Detik
+    let isExamRunning = false;
+    let isBannedActive = false;
+    let violationCount = 0;
+    let bannedInterval = null;
+    let securityReady = false;
+
+    function kirimDataKeBackend(actionName, dataPayload) {
+      if (!GAS_ENDPOINT_URL || GAS_ENDPOINT_URL.includes("example-replace")) {
+        console.warn("GAS_ENDPOINT_URL belum dikonfigurasi dengan URL Web App Apps Script Anda.");
+        return;
+      }
+
+      const bodyData = JSON.stringify({
+        action: actionName,
+        data: dataPayload
+      });
+
+      // Menggunakan fetch dengan mode no-cors agar lolos dari batasan CORS browser saat dari GitHub Pages
+      fetch(GAS_ENDPOINT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: bodyData
+      })
+      .then(() => {
+        console.log("Data terkirim ke GAS (" + actionName + ")");
+      })
+      .catch((err) => {
+        console.warn("Gagal mengirim ke GAS:", err);
+      });
+    }
+
+    function showSection(id) {
+      const vLogin = document.getElementById('view-login');
+      const vExam = document.getElementById('view-exam');
+      const vDq = document.getElementById('view-dq');
+      const vResult = document.getElementById('view-result');
+
+      if (vLogin) vLogin.style.display = 'none';
+      if (vExam) vExam.style.display = 'none';
+      if (vDq) vDq.style.display = 'none';
+      if (vResult) vResult.style.display = 'none';
+
+      const target = document.getElementById(id);
+      if (target) {
+        target.style.display = (id === 'view-exam') ? 'grid' : 'block';
+      }
+    }
+
+    window.handleStart = function() {
+      const namaInput = document.getElementById('input-nama');
+      const kelasInput = document.getElementById('input-kelas');
+      const errBox = document.getElementById('login-error');
+
+      const namaVal = (namaInput ? namaInput.value : '').trim();
+      const kelasVal = (kelasInput ? kelasInput.value : '').trim();
+
+      if (!namaVal || !kelasVal) {
+        if (errBox) errBox.style.display = 'block';
+        return;
+      }
+      if (errBox) errBox.style.display = 'none';
+
+      siswa = { nama: namaVal, kelas: kelasVal };
+
+      const dispNama = document.getElementById('display-nama');
+      const dispKelas = document.getElementById('display-kelas');
+      const hdrStatus = document.getElementById('header-status');
+
+      if (dispNama) dispNama.innerText = namaVal;
+      if (dispKelas) dispKelas.innerText = kelasVal;
+      if (hdrStatus) hdrStatus.style.display = 'flex';
+
+      showSection('view-exam');
+      isExamRunning = true;
+
+      renderGrid();
+      renderSoal(0);
+      startTimer();
+
+      // Grace period 5 detik untuk mencegah false-positive saat keyboard HP tertutup
+      setTimeout(() => {
+        aktifkanSecurity();
+      }, 5000);
+    };
+
+    function aktifkanSecurity() {
+      securityReady = true;
+
+      document.addEventListener('visibilitychange', () => {
+        if (!isExamRunning || !securityReady || isBannedActive) return;
+        if (document.hidden || document.visibilityState === 'hidden') {
+          handlePelanggaran('Beralih tab / Meminimalkan browser');
+        }
+      });
+    }
+
+    function handlePelanggaran(alasan) {
+      if (!isExamRunning || isBannedActive) return;
+
+      violationCount++;
+      const violCountEl = document.getElementById('header-violation-count');
+      if (violCountEl) violCountEl.innerText = violationCount;
+
+      kirimDataKeBackend("catatPelanggaran", {
+        nama: siswa.nama,
+        kelas: siswa.kelas,
+        pelanggaranKe: violationCount,
+        durasiBannedMenit: violationCount * 3,
+        jenis: alasan
+      });
+
+      if (violationCount >= 5) {
+        eksekusiDiskualifikasi();
+        return;
+      }
+
+      jalankanBanned(violationCount * 3 * 60);
+    }
+
+    function jalankanBanned(detik) {
+      isBannedActive = true;
+      const modal = document.getElementById('modal-banned');
+      const countEl = document.getElementById('banned-count');
+      const timerEl = document.getElementById('banned-timer');
+
+      if (countEl) countEl.innerText = violationCount;
+      if (modal) modal.style.display = 'flex';
+
+      let sisa = detik;
+      const updateText = () => {
+        const m = Math.floor(sisa / 60);
+        const s = sisa % 60;
+        if (timerEl) timerEl.innerText = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      };
+      updateText();
+
+      if (bannedInterval) clearInterval(bannedInterval);
+      bannedInterval = setInterval(() => {
+        sisa--;
+        updateText();
+        if (sisa <= 0) {
+          clearInterval(bannedInterval);
+          isBannedActive = false;
+          if (modal) modal.style.display = 'none';
+        }
+      }, 1000);
+    }
+
+    function eksekusiDiskualifikasi() {
+      isExamRunning = false;
+      isBannedActive = false;
+      if (timerInterval) clearInterval(timerInterval);
+      if (bannedInterval) clearInterval(bannedInterval);
+
+      const modalBanned = document.getElementById('modal-banned');
+      const hdrStatus = document.getElementById('header-status');
+      if (modalBanned) modalBanned.style.display = 'none';
+      if (hdrStatus) hdrStatus.style.display = 'none';
+
+      showSection('view-dq');
+      const dqNama = document.getElementById('dq-nama');
+      const dqKelas = document.getElementById('dq-kelas');
+      if (dqNama) dqNama.innerText = siswa.nama;
+      if (dqKelas) dqKelas.innerText = siswa.kelas;
+
+      kirimDataKeBackend("simpanHasil", {
+        nama: siswa.nama,
+        kelas: siswa.kelas,
+        mapel: 'Matematika SMA (Paket B)',
+        guru: 'Rahmat Djafar, S.Pd., Gr',
+        skor: 0,
+        status: 'DISKUALIFIKASI (5x Pelanggaran)',
+        pelanggaranCount: violationCount,
+        waktuPengerjaan: 'Didiskualifikasi',
+        jawabanJson: JSON.stringify(userAnswers)
+      });
+    }
+
+    function startTimer() {
+      const headerTimer = document.getElementById('header-timer');
+      if (timerInterval) clearInterval(timerInterval);
+
+      timerInterval = setInterval(() => {
+        sisaDetik--;
+        if (sisaDetik <= 0) {
+          clearInterval(timerInterval);
+          sisaDetik = 0;
+          submitUjian(true);
+        }
+
+        const m = Math.floor(sisaDetik / 60);
+        const s = sisaDetik % 60;
+        if (headerTimer) {
+          headerTimer.innerText = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+          if (sisaDetik < 300) {
+            headerTimer.style.color = '#dc2626';
+          }
+        }
+      }, 1000);
+    }
+
+    function renderSoal(idx) {
+      if (idx < 0 || idx >= SOAL_DB.length) return;
+      currentIndex = idx;
+      const q = SOAL_DB[idx];
+
+      const lblNo = document.getElementById('label-soal-no');
+      if (lblNo) lblNo.innerText = 'Soal ' + (idx + 1) + ' dari ' + SOAL_DB.length;
+
+      const boxDiagram = document.getElementById('box-diagram-soal');
+      if (boxDiagram) {
+        if (q.diagramKey && DIAGRAMS[q.diagramKey]) {
+          boxDiagram.style.display = 'flex';
+          boxDiagram.innerHTML = DIAGRAMS[q.diagramKey];
+        } else {
+          boxDiagram.style.display = 'none';
+          boxDiagram.innerHTML = '';
+        }
+      }
+
+      const qTitle = document.getElementById('text-pertanyaan');
+      if (qTitle) qTitle.innerHTML = q.question;
+
+      const btnRagu = document.getElementById('btn-ragu');
+      if (btnRagu) {
+        btnRagu.className = userDoubts[q.id] ? 'btn-ragu active' : 'btn-ragu';
+      }
+
+      const container = document.getElementById('box-opsi-jawaban');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (q.type === 'single') {
+        q.options.forEach(opt => {
+          const isSel = userAnswers[q.id] === opt.key;
+          const item = document.createElement('div');
+          item.className = 'option-item' + (isSel ? ' selected' : '');
+          item.onclick = () => {
+            userAnswers[q.id] = opt.key;
+            renderSoal(currentIndex);
+          };
+          item.innerHTML = `
+            <div class="option-radio-circle"></div>
+            <div class="option-text"><b>(${opt.key})</b> ${opt.text}</div>
+          `;
+          container.appendChild(item);
+        });
+      } else if (q.type === 'multiselect') {
+        const curList = userAnswers[q.id] || [];
+        q.options.forEach(opt => {
+          const isSel = curList.includes(opt.key);
+          const item = document.createElement('div');
+          item.className = 'option-item' + (isSel ? ' selected' : '');
+          item.onclick = () => {
+            let list = userAnswers[q.id] || [];
+            if (list.includes(opt.key)) {
+              list = list.filter(k => k !== opt.key);
+            } else {
+              list = [...list, opt.key];
+            }
+            userAnswers[q.id] = list;
+            renderSoal(currentIndex);
+          };
+          item.innerHTML = `
+            <div class="option-checkbox-square"></div>
+            <div class="option-text"><b>(${opt.key})</b> ${opt.text}</div>
+          `;
+          container.appendChild(item);
+        });
+      } else if (q.type === 'matrix') {
+        const table = document.createElement('table');
+        table.className = 'matrix-table';
+
+        let theadHtml = `<thead><tr><th style="width: 35px;">#</th><th>Pernyataan Analisis</th>`;
+        q.columns.forEach(col => {
+          theadHtml += `<th style="text-align: center; width: 110px;">${col}</th>`;
+        });
+        theadHtml += `</tr></thead>`;
+
+        let tbodyHtml = '<tbody>';
+        q.rows.forEach(r => {
+          const curVal = userAnswers[q.id] ? userAnswers[q.id][r.id] : null;
+          tbodyHtml += `<tr>
+            <td style="font-weight: bold;">${r.id}.</td>
+            <td>${r.text}</td>`;
+          q.columns.forEach(col => {
+            const isChecked = (curVal === col);
+            tbodyHtml += `<td class="matrix-cell-opt">
+              <span class="matrix-radio-pill ${isChecked ? 'active' : ''}" onclick="pilihMatrix('${q.id}', '${r.id}', '${col}')">
+                ${isChecked ? '● ' : '○ '} ${col}
+              </span>
+            </td>`;
+          });
+          tbodyHtml += `</tr>`;
+        });
+        tbodyHtml += '</tbody>';
+
+        table.innerHTML = theadHtml + tbodyHtml;
+        container.appendChild(table);
+      }
+
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      const btnFin = document.getElementById('btn-finish');
+
+      if (btnPrev) btnPrev.style.visibility = (idx === 0) ? 'hidden' : 'visible';
+      if (btnNext && btnFin) {
+        if (idx === SOAL_DB.length - 1) {
+          btnNext.style.display = 'none';
+          btnFin.style.display = 'block';
+        } else {
+          btnNext.style.display = 'block';
+          btnFin.style.display = 'none';
+        }
+      }
+
+      updateStatusTerjawab();
+      renderGrid();
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    window.pilihMatrix = function(qId, rowId, colVal) {
+      if (!userAnswers[qId]) userAnswers[qId] = {};
+      userAnswers[qId][rowId] = colVal;
+      renderSoal(currentIndex);
+    };
+
+    window.toggleRagu = function() {
+      const q = SOAL_DB[currentIndex];
+      userDoubts[q.id] = !userDoubts[q.id];
+      renderSoal(currentIndex);
+    };
+
+    window.handleNavPrev = function() {
+      if (currentIndex > 0) renderSoal(currentIndex - 1);
+    };
+
+    window.handleNavNext = function() {
+      if (currentIndex < SOAL_DB.length - 1) renderSoal(currentIndex + 1);
+    };
+
+    function isAnswerFilled(qId) {
+      const ans = userAnswers[qId];
+      if (!ans) return false;
+      const q = SOAL_DB.find(item => item.id === qId);
+      if (q.type === 'single') return !!ans;
+      if (q.type === 'multiselect') return Array.isArray(ans) && ans.length > 0;
+      if (q.type === 'matrix') {
+        const keys = Object.keys(ans);
+        return keys.length === q.rows.length;
+      }
+      return false;
+    }
+
+    function updateStatusTerjawab() {
+      let count = 0;
+      SOAL_DB.forEach(q => {
+        if (isAnswerFilled(q.id)) count++;
+      });
+      const stat = document.getElementById('stat-terjawab');
+      if (stat) stat.innerText = count + '/' + SOAL_DB.length + ' Terjawab';
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('grid-nomor');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      SOAL_DB.forEach((q, i) => {
+        const answered = isAnswerFilled(q.id);
+        const doubt = !!userDoubts[q.id];
+        const active = (i === currentIndex);
+
+        let cls = 'num-btn';
+        if (doubt) {
+          cls += ' ragu';
+        } else if (answered) {
+          cls += ' terjawab';
+        }
+        if (active) cls += ' active';
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = cls;
+        btn.innerText = i + 1;
+        btn.onclick = () => renderSoal(i);
+        grid.appendChild(btn);
+      });
+    }
+
+    function hitungEvaluasi() {
+      let correctCount = 0;
+      const nomorSalahList = [];
+      const detailSoal = {};
+
+      SOAL_DB.forEach(q => {
+        const ans = userAnswers[q.id];
+        let isCorrect = false;
+        let ansStr = '-';
+        let keyStr = '';
+
+        if (q.type === 'single') {
+          keyStr = q.key;
+          ansStr = ans || '-';
+          if (ans === q.key) isCorrect = true;
+        } else if (q.type === 'multiselect') {
+          keyStr = q.key.sort().join(',');
+          const userArr = Array.isArray(ans) ? [...ans].sort() : [];
+          ansStr = userArr.length > 0 ? userArr.join(',') : '-';
+          if (userArr.length === q.key.length && userArr.every((val, index) => val === q.key[index])) {
+            isCorrect = true;
+          }
+        } else if (q.type === 'matrix') {
+          const keys = Object.keys(q.key);
+          keyStr = keys.map(k => k + ':' + q.key[k]).join(', ');
+          const userObj = ans || {};
+          const userArr = keys.map(k => k + ':' + (userObj[k] || '-'));
+          ansStr = userArr.join(', ');
+          const allMatch = keys.every(k => userObj[k] === q.key[k]);
+          if (allMatch) isCorrect = true;
+        }
+
+        if (isCorrect) {
+          correctCount++;
+        } else {
+          nomorSalahList.push(q.id);
+        }
+
+        detailSoal[q.id] = {
+          nomor: q.id,
+          isCorrect: isCorrect,
+          userAnswer: ansStr,
+          kunci: keyStr
+        };
+      });
+
+      const finalScore = Math.round((correctCount / SOAL_DB.length) * 100);
+
+      return {
+        finalScore: finalScore,
+        totalBenar: correctCount,
+        totalSalah: SOAL_DB.length - correctCount,
+        nomorSalahList: nomorSalahList,
+        nomorSalahStr: nomorSalahList.length > 0 ? nomorSalahList.map(n => "No. " + n).join(", ") : "Tidak Ada (Sempurna)",
+        detailSoal: detailSoal
+      };
+    }
+
+    window.bukaModalKonfirmasi = function() {
+      let ansCount = 0;
+      let doubtCount = 0;
+
+      SOAL_DB.forEach(q => {
+        if (isAnswerFilled(q.id)) ansCount++;
+        if (userDoubts[q.id]) doubtCount++;
+      });
+
+      const confAns = document.getElementById('conf-ans');
+      const confDoubt = document.getElementById('conf-doubt');
+      const confEmpty = document.getElementById('conf-empty');
+      const modalConfirm = document.getElementById('modal-confirm');
+
+      if (confAns) confAns.innerText = ansCount;
+      if (confDoubt) confDoubt.innerText = doubtCount;
+      if (confEmpty) confEmpty.innerText = SOAL_DB.length - ansCount;
+      if (modalConfirm) modalConfirm.style.display = 'flex';
+    };
+
+    window.tutupModalKonfirmasi = function() {
+      const modalConfirm = document.getElementById('modal-confirm');
+      if (modalConfirm) modalConfirm.style.display = 'none';
+    };
+
+    window.submitUjian = function(isTimeOut = false) {
+      tutupModalKonfirmasi();
+      isExamRunning = false;
+      if (timerInterval) clearInterval(timerInterval);
+
+      const evaluasi = hitungEvaluasi();
+      const finalScore = evaluasi.finalScore;
+      const usedSec = (80 * 60) - sisaDetik;
+      const m = Math.floor(usedSec / 60);
+      const s = usedSec % 60;
+      const durStr = m + 'm ' + s + 'd';
+
+      const hdrStatus = document.getElementById('header-status');
+      if (hdrStatus) hdrStatus.style.display = 'none';
+
+      showSection('view-result');
+
+      const resScore = document.getElementById('res-score');
+      const resDetail = document.getElementById('res-detail');
+      const resNama = document.getElementById('res-nama');
+      const resKelas = document.getElementById('res-kelas');
+      const resViol = document.getElementById('res-viol');
+      const resBenar = document.getElementById('res-total-benar');
+      const resSalah = document.getElementById('res-total-salah');
+      const resListSalah = document.getElementById('res-list-salah');
+      const resStatBadge = document.getElementById('res-stat-badge');
+
+      if (resScore) resScore.innerText = finalScore;
+      if (resDetail) resDetail.innerText = SOAL_DB.length + ' Soal Selesai • Waktu Pengerjaan ' + durStr;
+      if (resNama) resNama.innerText = siswa.nama;
+      if (resKelas) resKelas.innerText = siswa.kelas;
+      if (resViol) resViol.innerText = violationCount + ' kali';
+      if (resBenar) resBenar.innerText = evaluasi.totalBenar + ' Soal';
+      if (resSalah) resSalah.innerText = evaluasi.totalSalah + ' Soal';
+      if (resListSalah) resListSalah.innerText = evaluasi.nomorSalahStr;
+      if (resStatBadge) resStatBadge.innerText = evaluasi.totalBenar + ' / ' + SOAL_DB.length + ' Benar';
+
+      kirimDataKeBackend("simpanHasil", {
+        nama: siswa.nama,
+        kelas: siswa.kelas,
+        mapel: 'Matematika SMA (Paket B)',
+        guru: 'Rahmat Djafar, S.Pd., Gr',
+        skor: finalScore,
+        evaluasi: evaluasi,
+        status: isTimeOut ? 'Waktu Habis' : 'Selesai',
+        pelanggaranCount: violationCount,
+        waktuPengerjaan: durStr,
+        jawabanJson: JSON.stringify(userAnswers)
+      });
+    };
+  </script>
+</body>
+</html>
