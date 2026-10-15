@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CBT TKA Matematika SMA - SMA IT Al Ishlah Gorontalo</title>
 
-  <!-- MathJax Configuration untuk Render Rumus Matematika -->
+  <!-- MathJax Configuration -->
   <script>
     window.MathJax = {
       tex: {
@@ -573,19 +573,19 @@
       </div>
 
       <div class="exam-info-card">
-        <div><span>Mata Pelajaran:</span><b>Matematika SMA (Paket B)</b></div>
-        <div><span>Jumlah Soal:</span><b>20 Butir Soal Terintegrasi</b></div>
-        <div><span>Alokasi Waktu:</span><b>80 Menit</b></div>
-        <div><span>Skala Penilaian:</span><b>0 - 100</b></div>
+        <div><span>Subject:</span><b>Matematika SMA (Paket B)</b></div>
+        <div><span>Questions:</span><b>20 Butir Soal Terintegrasi</b></div>
+        <div><span>Time Allocated:</span><b>80 Menit</b></div>
+        <div><span>Target Score:</span><b>Skala 0 - 100</b></div>
       </div>
 
       <div class="warning-card">
-        <b>&#x26A0; Peringatan Keamanan Aktif:</b><br>
-        Dilarang beralih tab, meminimalkan jendela, atau membuka aplikasi lain. Setiap pelanggaran memicu penguncian layar <b>3 menit (kelipatan)</b> dan <b>diskualifikasi otomatis pada pelanggaran ke-5</b>.
+        <b>&#x26A0; Security Guard Active:</b><br>
+        Dilarang beralih tab, keluar aplikasi, atau meminimalkan browser. Pelanggaran memicu penguncian layar <b>3 menit (kelipatan)</b> dan <b>diskualifikasi pada pelanggaran ke-5</b>.
       </div>
 
       <div id="login-error" style="display: none; background: #fff1f2; color: #be123c; padding: 10px; border-radius: 8px; font-size: 12px; margin-bottom: 14px; font-weight: 700;">
-        Harap isi Nama Lengkap dan pilih Kelas Anda!
+        Harap masukkan Nama Lengkap dan pilih Kelas Anda!
       </div>
 
       <div class="form-group">
@@ -664,7 +664,7 @@
     <section id="view-result" class="card login-box" style="display: none; text-align: center;">
       <div style="font-size: 40px; color: #059669; margin-bottom: 10px;">&#x1F3C6;</div>
       <h2 style="font-size: 20px; font-weight: 900; color: #0f172a;">Ujian Selesai!</h2>
-      <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Hasil evaluasi TKA Matematika Anda telah berhasil dikirim ke database Google Spreadsheet.</p>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Hasil evaluasi TKA Matematika Anda telah berhasil dicatat ke database Google Spreadsheet.</p>
       
       <div style="background: #059669; color: #ffffff; padding: 20px; border-radius: 14px; margin-bottom: 16px;">
         <div style="font-size: 12px; text-transform: uppercase; color: #a7f3d0; font-weight: 700;">Nilai Akhir (Skala 0 - 100)</div>
@@ -696,6 +696,11 @@
         <div style="font-size: 12px; color: #475569;">
           <div>Nomor Soal yang Salah: <span id="res-list-salah" style="color: #be123c; font-weight: 700;">-</span></div>
         </div>
+      </div>
+      
+      <!-- Status Sinkronisasi Server -->
+      <div id="sync-status" style="font-size: 12px; color: #059669; font-weight: bold; margin-top: 8px;">
+        Sedang mengirim data ke server spreadsheet...
       </div>
     </section>
 
@@ -735,12 +740,11 @@
   </footer>
 
   <script>
-    // GANTI URL DI BAWAH DENGAN WEB APP URL DARI GOOGLE APPS SCRIPT SETELAH DI-DEPLOY
-    const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbz47bHXH2Glw56zJRk4hZ1XsMCNhcUUEL9IxUAke2K0HzZFCFckOnVdRwrM3Ailaloc/exec";
-
+    // Diagram Vektor SVG untuk Soal Matematika
     const DIAGRAMS = {
       d2: `
         <svg viewBox="0 0 460 260" width="100%" max-width="440" height="230" style="background:#ffffff; border-radius:8px;">
+          <!-- Axes -->
           <line x1="60" y1="210" x2="420" y2="210" stroke="#0f172a" stroke-width="2" marker-end="url(#arrowX)"/>
           <line x1="80" y1="240" x2="80" y2="20" stroke="#0f172a" stroke-width="2" marker-end="url(#arrowY)"/>
           <defs>
@@ -754,15 +758,25 @@
           <text x="425" y="215" font-size="13" font-weight="bold">X</text>
           <text x="75" y="15" font-size="13" font-weight="bold">Y</text>
           <text x="68" y="226" font-size="12">0</text>
+
+          <!-- Ticks -->
           <text x="70" y="80" font-size="12" font-weight="bold">6</text>
           <text x="70" y="145" font-size="12" font-weight="bold">3</text>
           <text x="240" y="228" font-size="12" font-weight="bold">6</text>
           <text x="350" y="228" font-size="12" font-weight="bold">9</text>
+
+          <!-- Line 1: x + y = 6 -> (0,6) to (6,0) [x=80, y=80] to [x=245, y=210] -->
           <line x1="50" y1="55" x2="280" y2="235" stroke="#2563eb" stroke-width="2.2"/>
           <text x="260" y="180" font-size="11" fill="#2563eb" font-weight="bold">x + y = 6</text>
+
+          <!-- Line 2: x + 3y = 9 -> (0,3) to (9,0) [x=80, y=145] to [x=355, y=210] -->
           <line x1="50" y1="138" x2="390" y2="218" stroke="#dc2626" stroke-width="2.2"/>
           <text x="340" y="195" font-size="11" fill="#dc2626" font-weight="bold">x + 3y = 9</text>
+
+          <!-- Shaded Region II between lines -->
           <polygon points="80,145 190,170 80,80" fill="#a7f3d0" opacity="0.65"/>
+
+          <!-- Region Labels -->
           <text x="130" y="195" font-size="13" font-weight="bold" fill="#0f172a">I</text>
           <text x="110" y="140" font-size="13" font-weight="bold" fill="#065f46">II</text>
           <text x="220" y="150" font-size="13" font-weight="bold" fill="#0f172a">III</text>
@@ -772,15 +786,20 @@
       `,
       d6: `
         <svg viewBox="0 0 340 240" width="100%" max-width="320" height="210" style="background:#ffffff; border-radius:8px;">
+          <!-- Karton Persegi 24x24 -->
           <rect x="50" y="25" width="180" height="180" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+          <!-- 4 Pojok Digunting x -->
           <rect x="50" y="25" width="40" height="40" fill="#94a3b8" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
           <rect x="190" y="25" width="40" height="40" fill="#94a3b8" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
           <rect x="50" y="165" width="40" height="40" fill="#94a3b8" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
           <rect x="190" y="165" width="40" height="40" fill="#94a3b8" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
+          
           <text x="65" y="48" font-size="12" font-style="italic">x</text>
           <text x="205" y="48" font-size="12" font-style="italic">x</text>
           <text x="65" y="188" font-size="12" font-style="italic">x</text>
           <text x="205" y="188" font-size="12" font-style="italic">x</text>
+
+          <!-- Label sisi 24 cm -->
           <line x1="35" y1="25" x2="35" y2="205" stroke="#0f172a" stroke-width="1.5"/>
           <line x1="30" y1="25" x2="40" y2="25" stroke="#0f172a" stroke-width="1.5"/>
           <line x1="30" y1="205" x2="40" y2="205" stroke="#0f172a" stroke-width="1.5"/>
@@ -789,31 +808,47 @@
       `,
       d8: `
         <svg viewBox="0 0 520 250" width="100%" max-width="500" height="230" style="background:#ffffff; border-radius:8px;">
+          <!-- Grid lines -->
           <line x1="50" y1="200" x2="490" y2="200" stroke="#0f172a" stroke-width="1.5"/>
           <line x1="50" y1="160" x2="490" y2="160" stroke="#e2e8f0" stroke-width="1"/>
           <line x1="50" y1="120" x2="490" y2="120" stroke="#e2e8f0" stroke-width="1"/>
           <line x1="50" y1="80" x2="490" y2="80" stroke="#e2e8f0" stroke-width="1"/>
           <line x1="50" y1="40" x2="490" y2="40" stroke="#e2e8f0" stroke-width="1"/>
+
+          <!-- Y-Labels -->
           <text x="20" y="205" font-size="11">0</text>
           <text x="15" y="165" font-size="11">50</text>
           <text x="10" y="125" font-size="11">100</text>
           <text x="10" y="85" font-size="11">150</text>
           <text x="10" y="45" font-size="11">200</text>
+
+          <!-- Bars: Jan (120), Feb (140), Mar (110), Apr (180), Mei (40), Jun (130) -->
+          <!-- Jan -->
           <rect x="75" y="104" width="35" height="96" fill="#059669"/>
           <text x="82" y="98" font-size="11" font-weight="bold">120</text>
           <text x="80" y="218" font-size="11">Jan</text>
+
+          <!-- Feb -->
           <rect x="145" y="88" width="35" height="112" fill="#059669"/>
           <text x="152" y="82" font-size="11" font-weight="bold">140</text>
           <text x="150" y="218" font-size="11">Feb</text>
+
+          <!-- Mar -->
           <rect x="215" y="112" width="35" height="88" fill="#059669"/>
           <text x="222" y="106" font-size="11" font-weight="bold">110</text>
           <text x="220" y="218" font-size="11">Mar</text>
+
+          <!-- Apr -->
           <rect x="285" y="56" width="35" height="144" fill="#047857"/>
           <text x="292" y="50" font-size="11" font-weight="bold">180</text>
           <text x="290" y="218" font-size="11">Apr</text>
+
+          <!-- Mei -->
           <rect x="355" y="168" width="35" height="32" fill="#dc2626"/>
           <text x="365" y="162" font-size="11" font-weight="bold">40</text>
           <text x="360" y="218" font-size="11">Mei</text>
+
+          <!-- Jun -->
           <rect x="425" y="96" width="35" height="104" fill="#059669"/>
           <text x="432" y="90" font-size="11" font-weight="bold">130</text>
           <text x="430" y="218" font-size="11">Jun</text>
@@ -839,39 +874,56 @@
       `,
       d13: `
         <svg viewBox="0 0 380 200" width="100%" max-width="360" height="190" style="background:#ffffff; border-radius:8px;">
+          <!-- Trapesium ABCD sama kaki -->
           <polygon points="100,50 260,50 320,160 40,160" fill="#ecfdf5" stroke="#059669" stroke-width="2.5"/>
+          <!-- Diagonal BD -->
           <line x1="40" y1="160" x2="260" y2="50" stroke="#0284c7" stroke-width="2" stroke-dasharray="4,3"/>
+
+          <!-- Points -->
           <text x="30" y="180" font-size="13" font-weight="bold">A</text>
           <text x="325" y="180" font-size="13" font-weight="bold">B</text>
           <text x="265" y="45" font-size="13" font-weight="bold">C</text>
           <text x="90" y="45" font-size="13" font-weight="bold">D</text>
+
+          <!-- Tanda sejajar & sama kaki -->
           <text x="175" y="45" font-size="11" fill="#047857">&gt;</text>
           <text x="175" y="175" font-size="11" fill="#047857">&gt;</text>
           <line x1="65" y1="100" x2="75" y2="105" stroke="#059669" stroke-width="2"/>
           <line x1="285" y1="100" x2="295" y2="105" stroke="#059669" stroke-width="2"/>
+
+          <!-- Label Sudut -->
           <text x="55" y="150" font-size="11" font-weight="bold">65°</text>
           <text x="270" y="150" font-size="11" font-weight="bold">25°</text>
         </svg>
       `,
       d14: `
         <svg viewBox="0 0 360 160" width="100%" max-width="340" height="150" style="background:#ffffff; border-radius:8px;">
+          <!-- Trapesium Siku-siku ABCD -->
           <polygon points="60,40 180,40 300,120 60,120" fill="#f8fafc" stroke="#334155" stroke-width="2.2"/>
+          <!-- Siku-siku A dan B -->
           <rect x="60" y="40" width="14" height="14" fill="none" stroke="#dc2626" stroke-width="1.5"/>
           <rect x="60" y="106" width="14" height="14" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+
           <text x="45" y="42" font-size="13" font-weight="bold">A</text>
           <text x="180" y="32" font-size="13" font-weight="bold">D</text>
           <text x="310" y="125" font-size="13" font-weight="bold">C</text>
           <text x="45" y="125" font-size="13" font-weight="bold">B</text>
+
           <text x="25" y="85" font-size="12" font-weight="bold" fill="#059669">AB = 4</text>
         </svg>
       `,
       d15: `
         <svg viewBox="0 0 340 220" width="100%" max-width="320" height="200" style="background:#ffffff; border-radius:8px;">
+          <!-- Dinding & Lantai -->
           <line x1="60" y1="20" x2="60" y2="180" stroke="#334155" stroke-width="4"/>
           <line x1="40" y1="180" x2="300" y2="180" stroke="#64748b" stroke-width="3"/>
           <rect x="60" y="164" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+
+          <!-- Tangga -->
           <line x1="60" y1="40" x2="220" y2="180" stroke="#b45309" stroke-width="5" stroke-linecap="round"/>
           <text x="145" y="100" font-size="12" font-weight="bold" fill="#b45309">Panjang = 8 m</text>
+
+          <!-- Sudut lantai 60 deg -->
           <path d="M 190,180 A 30,30 0 0,0 180,145" fill="none" stroke="#059669" stroke-width="2"/>
           <text x="155" y="172" font-size="12" font-weight="bold" fill="#059669">60°</text>
           <text x="15" y="110" font-size="12" font-weight="bold" fill="#0f172a">Tinggi = ?</text>
@@ -1218,31 +1270,73 @@
     let bannedInterval = null;
     let securityReady = false;
 
-    function kirimDataKeBackend(actionName, dataPayload) {
-      if (!GAS_ENDPOINT_URL || GAS_ENDPOINT_URL.includes("example-replace")) {
-        console.warn("GAS_ENDPOINT_URL belum dikonfigurasi dengan URL Web App Apps Script Anda.");
+    // Masukkan URL Deployment Google Apps Script Anda (yang berakhiran /exec)
+    const GAS_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwYOUR_ACTUAL_ID_HERE/exec";
+
+    function sendToGAS(actionName, payloadData, callback) {
+      const fullPayload = {
+        action: actionName,
+        data: payloadData
+      };
+
+      // 1. Prioritas Google Workspace iframe (jika dijalankan langsung di GAS)
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        try {
+          google.script.run
+            .withSuccessHandler(function(res) {
+              console.log("[GAS Native Success]:", res);
+              if (callback) callback(true);
+            })
+            .withFailureHandler(function(err) {
+              console.warn("[GAS Native Fail]:", err);
+              if (callback) callback(false);
+            })
+            [actionName === "simpanHasil" ? "simpanHasilUjian" : "catatLogPelanggaran"](payloadData);
+          return;
+        } catch (e) {
+          console.warn("GAS Native failed, fallback to HTTP:", e);
+        }
+      }
+
+      // 2. Jalur GitHub Pages: Gunakan URLSearchParams untuk menghindari CORS Preflight (OPTIONS)
+      if (!GAS_ENDPOINT_URL || GAS_ENDPOINT_URL.includes("YOUR_ACTUAL_ID")) {
+        console.warn("PERINGATAN: GAS_ENDPOINT_URL belum diganti dengan URL Web App Apps Script Anda!");
+        const syncEl = document.getElementById('sync-status');
+        if (syncEl) {
+          syncEl.innerText = "⚠ Perhatian: GAS_ENDPOINT_URL belum dikonfigurasi di script.";
+          syncEl.style.color = "#dc2626";
+        }
         return;
       }
 
-      const bodyData = JSON.stringify({
-        action: actionName,
-        data: dataPayload
-      });
+      const postParams = new URLSearchParams();
+      postParams.append("data", JSON.stringify(fullPayload));
 
-      // Menggunakan fetch dengan mode no-cors agar lolos dari batasan CORS browser saat dari GitHub Pages
       fetch(GAS_ENDPOINT_URL, {
         method: "POST",
-        mode: "no-cors",
+        mode: "no-cors", // KUNCI: Menghindari pemblokiran CORS oleh browser
         headers: {
-          "Content-Type": "text/plain;charset=utf-8"
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: bodyData
+        body: postParams.toString()
       })
-      .then(() => {
-        console.log("Data terkirim ke GAS (" + actionName + ")");
+      .then(function() {
+        console.log("[HTTP Sent successfully]:", actionName);
+        const syncEl = document.getElementById('sync-status');
+        if (syncEl) {
+          syncEl.innerText = "✔ Data ujian berhasil tersimpan di Google Spreadsheet.";
+          syncEl.style.color = "#059669";
+        }
+        if (callback) callback(true);
       })
-      .catch((err) => {
-        console.warn("Gagal mengirim ke GAS:", err);
+      .catch(function(err) {
+        console.error("[HTTP Send Error]:", err);
+        const syncEl = document.getElementById('sync-status');
+        if (syncEl) {
+          syncEl.innerText = "Gagal terhubung ke database. Cek koneksi internet Anda.";
+          syncEl.style.color = "#dc2626";
+        }
+        if (callback) callback(false);
       });
     }
 
@@ -1294,7 +1388,6 @@
       renderSoal(0);
       startTimer();
 
-      // Grace period 5 detik untuk mencegah false-positive saat keyboard HP tertutup
       setTimeout(() => {
         aktifkanSecurity();
       }, 5000);
@@ -1318,7 +1411,7 @@
       const violCountEl = document.getElementById('header-violation-count');
       if (violCountEl) violCountEl.innerText = violationCount;
 
-      kirimDataKeBackend("catatPelanggaran", {
+      sendToGAS('catatPelanggaran', {
         nama: siswa.nama,
         kelas: siswa.kelas,
         pelanggaranKe: violationCount,
@@ -1380,7 +1473,7 @@
       if (dqNama) dqNama.innerText = siswa.nama;
       if (dqKelas) dqKelas.innerText = siswa.kelas;
 
-      kirimDataKeBackend("simpanHasil", {
+      sendToGAS('simpanHasilUjian', {
         nama: siswa.nama,
         kelas: siswa.kelas,
         mapel: 'Matematika SMA (Paket B)',
@@ -1424,6 +1517,7 @@
       const lblNo = document.getElementById('label-soal-no');
       if (lblNo) lblNo.innerText = 'Soal ' + (idx + 1) + ' dari ' + SOAL_DB.length;
 
+      // Render Diagram Container
       const boxDiagram = document.getElementById('box-diagram-soal');
       if (boxDiagram) {
         if (q.diagramKey && DIAGRAMS[q.diagramKey]) {
@@ -1447,6 +1541,7 @@
       if (!container) return;
       container.innerHTML = '';
 
+      // TIPE 1: SINGLE CHOICE
       if (q.type === 'single') {
         q.options.forEach(opt => {
           const isSel = userAnswers[q.id] === opt.key;
@@ -1462,7 +1557,10 @@
           `;
           container.appendChild(item);
         });
-      } else if (q.type === 'multiselect') {
+      }
+
+      // TIPE 2: MULTISELECT (PGK)
+      else if (q.type === 'multiselect') {
         const curList = userAnswers[q.id] || [];
         q.options.forEach(opt => {
           const isSel = curList.includes(opt.key);
@@ -1484,7 +1582,10 @@
           `;
           container.appendChild(item);
         });
-      } else if (q.type === 'matrix') {
+      }
+
+      // TIPE 3: MATRIX TABLE
+      else if (q.type === 'matrix') {
         const table = document.createElement('table');
         table.className = 'matrix-table';
 
@@ -1534,6 +1635,7 @@
       updateStatusTerjawab();
       renderGrid();
 
+      // Trigger MathJax re-render
       if (window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
@@ -1728,7 +1830,13 @@
       if (resListSalah) resListSalah.innerText = evaluasi.nomorSalahStr;
       if (resStatBadge) resStatBadge.innerText = evaluasi.totalBenar + ' / ' + SOAL_DB.length + ' Benar';
 
-      kirimDataKeBackend("simpanHasil", {
+      const syncEl = document.getElementById('sync-status');
+      if (syncEl) {
+        syncEl.innerText = "⏳ Sedang mengirim data ke Google Spreadsheet...";
+        syncEl.style.color = "#0284c7";
+      }
+
+      sendToGAS('simpanHasilUjian', {
         nama: siswa.nama,
         kelas: siswa.kelas,
         mapel: 'Matematika SMA (Paket B)',
